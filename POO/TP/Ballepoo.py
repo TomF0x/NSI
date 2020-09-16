@@ -13,8 +13,8 @@ class Balle:
     def __init__(self):
         self.couleur = (randint(0, 255), randint(0, 255), randint(0, 255))
         self.size = randint(8, 15)
-        self.x = randint(0, ecran[0] - self.size)
-        self.y = randint(0, ecran[1] - self.size)
+        self.x = randint(self.size, ecran[0] - self.size)
+        self.y = randint(self.size, ecran[1] - self.size)
         self.dx = randint(-5, 5)
         self.dy = randint(-5, 5)
         pygame.draw.circle(fenetre, self.couleur, (self.x, self.y), self.size)

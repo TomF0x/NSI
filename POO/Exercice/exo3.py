@@ -9,16 +9,12 @@ class Chrono:
 
     def avance(self, s):
         self.secondes += s
-        if self.secondes > 59:
-            self.minutes += self.secondes // 60
-            self.secondes = self.secondes % 60
-        if self.minutes > 59:
-            self.heures += self.minutes // 60
-            self.minutes = self.minutes % 60
+        self.minutes += self.secondes // 60
+        self.secondes = self.secondes % 60
+        self.heures += self.minutes // 60
+        self.minutes = self.minutes % 60
 
-#testmec
-
-temps = Chrono(1, 32, 45)
+temps = Chrono(1, 34, 45)
 temps.affiche()
 temps.avance(10)
 temps.affiche()

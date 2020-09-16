@@ -1,30 +1,33 @@
+# Colision sans utiliser de POO
 import time
-
 import pygame
+from random import randint
 
 ecran = (640, 480)
 pygame.display.init()
 fenetre = pygame.display.set_mode((ecran[0], ecran[1]))
 fenetre.fill([0, 0, 0])
 
-vitesse = 10
-xa = 300
-ya = 200
-xb = 100
-yb = 200
+vitesse = randint(5,10)
+xa = randint(11,ecran[0]-11)
+ya = randint(11,ecran[1]-11)
+xb = randint(11,ecran[0]-11)
+yb = randint(11,ecran[1]-11)
 dxa = vitesse
 dya = -vitesse
 dxb = vitesse
 dyb = -vitesse
 couleur = (44, 170, 250)
 bleu = (0, 255, 0)
+
 while True:
     if (((xa - xb) ** 2) + ((ya - yb) ** 2)) ** 0.5 < 10:
-        print("touched")
-        dxa = dxa * (-1)
-        dya = dya * (-1)
-        dxb = dxb * (-1)
-        dyb = dyb * (-1)
+        temp1 = dxa
+        temp2 = dxb
+        dxa = dxb
+        dya = dyb
+        dxb = temp1
+        dyb = temp2
     fenetre.fill([0, 0, 0])
     pygame.draw.circle(fenetre, couleur, (xa, ya), 10)
     pygame.draw.circle(fenetre, bleu, (xb, yb), 10)
@@ -40,13 +43,10 @@ while True:
     ya += dya
     xb += dxb
     yb += dyb
-    clock = pygame.time.Clock()
-    clock.tick(120)
-    pygame.display.update()
+    pygame.display.flip()
 
-    # routine pour pouvoir fermer «proprement» la fenêtre Pygame
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.display.quit()
 
-    time.sleep(0.1)
+    time.sleep(0.01)

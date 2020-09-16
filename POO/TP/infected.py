@@ -5,22 +5,19 @@ import pygame
 
 from graph import graphique
 
-ecran = (640, 480)
+ecran = (800, 800)
 pygame.display.init()
 fenetre = pygame.display.set_mode((ecran[0], ecran[1]))
 fenetre.fill([0, 0, 0])
 start = time.time()
-
-t = []
-nb = []
 
 
 class Balle:
     def __init__(self, infect):
         self.size = 10
         self.couleur = (0, 255, 0)
-        self.x = randint(0, ecran[0] - self.size)
-        self.y = randint(0, ecran[1] - self.size)
+        self.x = randint(self.size, ecran[0] - self.size)
+        self.y = randint(self.size, ecran[1] - self.size)
         self.dx = randint(-5, 5)
         self.dy = randint(-5, 5)
         self.infecte = infect
@@ -62,16 +59,10 @@ while True:
             total += 1
     if total == len(listeballe):
         print("Les {0} balles sont toutes infectées après {1}s".format(len(listeballe), time.time() - start))
-        t.append(time.time() - start)
-        nb.append(len(listeballe))
         listeballe.clear()
         listeballe = [Balle(False) for i in range(total + 10)]
         listeballe.append(Balle(True))
         start = time.time()
-        nombrecycle += 1
-        if nombrecycle == 10:
-            graphique(t, nb)
-            break
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.display.quit()
