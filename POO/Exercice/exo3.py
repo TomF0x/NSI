@@ -16,6 +16,7 @@ class Chrono:
             self.heures += self.minutes // 60
             self.minutes = self.minutes % 60
 
+#testmec
 
 temps = Chrono(1, 32, 45)
 temps.affiche()
